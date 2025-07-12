@@ -39,4 +39,25 @@ export class MemberService {
     
     return this.http.put<void>(url, member);
   }
+
+  uploadPhoto(file: File) {
+    const url = `${this.baseUrl}members/add-photo`;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<Photo>(url, formData);
+  }
+
+  setMainPhoto(photo: Photo) {
+    const url = `${this.baseUrl}members/set-main-photo/${photo.id}`;
+
+    return this.http.put<void>(url, {});
+  }
+
+  deletePhoto(photoId: number) {
+    const url = `${this.baseUrl}members/delete-photo/${photoId}`;
+
+    return this.http.delete<void>(url);
+  }
 }

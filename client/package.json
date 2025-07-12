@@ -32,9 +32,9 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.1.0-rc.0",
-    "@angular/cli": "^20.1.0-rc.0",
-    "@angular/compiler-cli": "^20.1.0-next.0",
+    "@angular/build": "^20.1.0",
+    "@angular/cli": "^20.1.0",
+    "@angular/compiler-cli": "^20.1",
     "@types/jasmine": "~5.1.0",
     "daisyui": "^5.0.43",
     "jasmine-core": "~5.8.0",
