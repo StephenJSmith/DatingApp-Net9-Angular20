@@ -25,27 +25,25 @@ export class Nav implements OnInit {
     document.documentElement.setAttribute('data-theme', this.selectedTheme());
   }
 
-  handleSelectedTheme(theme: string) {
+  handleSelectTheme(theme: string) {
     this.selectedTheme.set(theme);
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
-    const elem = document.activeElement as HTMLElement;
+    const elem = document.activeElement as HTMLDivElement;
     if (elem) elem.blur();
   }
 
   login() {
-    this.accountService
-      .login(this.creds)
-      .subscribe({
-        next: () => {
-          this.router.navigateByUrl('/members');
-          this.toast.success('Logged in successfully');
-          this.creds = {};
-        },
-        error: error => {
-          this.toast.error(error.error);
-        }
-      });
+    this.accountService.login(this.creds).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/members');
+        this.toast.success('Logged in successfully');
+        this.creds = {};
+      },
+      error: error => {
+        this.toast.error(error.error);
+      }
+    })
   }
 
   logout() {

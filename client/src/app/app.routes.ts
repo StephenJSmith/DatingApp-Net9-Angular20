@@ -15,34 +15,31 @@ import { memberResolver } from '../features/members/member-resolver';
 import { preventUnsavedChangesGuard } from '../core/guards/prevent-unsaved-changes-guard';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  {
-    path: '',
-    runGuardsAndResolvers: 'always',
-    canActivate: [authGuard],
-    children: [
-      { path: 'members', component: MemberList },
-      {
-        path: 'members/:id',
-        resolve: { member: memberResolver },
-        component: MemberDetailed,
+    { path: '', component: Home },
+    {
+        path: '',
+        runGuardsAndResolvers: 'always',
+        canActivate: [authGuard],
         children: [
-          { path: '', redirectTo: 'profile', pathMatch: 'full' },
-          {
-            path: 'profile',
-            component: MemberProfile,
-            title: 'Profile',
-            canDeactivate: [preventUnsavedChangesGuard],
-          },
-          { path: 'photos', component: MemberPhotos, title: 'Photos' },
-          { path: 'messages', component: MemberMessages, title: 'Messages' },
-        ],
-      },
-      { path: 'lists', component: Lists },
-      { path: 'messages', component: Messages },
-    ],
-  },
-  { path: 'errors', component: TestErrors },
-  { path: 'server-error', component: ServerError },
-  { path: '**', component: NotFound },
+            { path: 'members', component: MemberList },
+            { 
+                path: 'members/:id', 
+                resolve: {member: memberResolver},
+                runGuardsAndResolvers: 'always',
+                component: MemberDetailed,
+                children: [
+                    {path: '', redirectTo: 'profile', pathMatch: 'full'},
+                    {path: 'profile', component: MemberProfile, title: 'Profile', 
+                        canDeactivate: [preventUnsavedChangesGuard]},
+                    {path: 'photos', component: MemberPhotos, title: 'Photos'},
+                    {path: 'messages', component: MemberMessages, title: 'Messages'},
+                ]
+            },
+            { path: 'lists', component: Lists },
+            { path: 'messages', component: Messages },
+        ]
+    },
+    { path: 'errors', component: TestErrors },
+    { path: 'server-error', component: ServerError },
+    { path: '**', component: NotFound },
 ];
